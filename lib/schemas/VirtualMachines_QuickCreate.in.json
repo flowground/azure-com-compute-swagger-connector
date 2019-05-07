@@ -1,0 +1,128 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+        },
+        "deploymentName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Deployment operation parameters.",
+            "properties": {
+                "properties": {
+                    "description": "Gets or sets the deployment properties.",
+                    "x-ms-client-flatten": true,
+                    "properties": {
+                        "mode": {
+                            "description": "Gets or sets the deployment mode.",
+                            "enum": [
+                                "Incremental"
+                            ],
+                            "type": "string"
+                        },
+                        "parameters": {
+                            "description": "Deployment parameters. Use only one of Parameters or ParametersLink.",
+                            "x-ms-client-flatten": true,
+                            "properties": {
+                                "adminPassword": {
+                                    "properties": {
+                                        "value": {
+                                            "description": "Password for the Virtual Machine.",
+                                            "format": "password",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value"
+                                    ],
+                                    "type": "object",
+                                    "x-ms-client-flatten": true
+                                },
+                                "adminUsername": {
+                                    "properties": {
+                                        "value": {
+                                            "description": "Username for the Virtual Machine.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value"
+                                    ],
+                                    "type": "object",
+                                    "x-ms-client-flatten": true
+                                },
+                                "dnsLabelPrefix": {
+                                    "properties": {
+                                        "value": {
+                                            "description": "Unique DNS Name for the Public IP used to access the Virtual Machine.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value"
+                                    ],
+                                    "type": "object",
+                                    "x-ms-client-flatten": true
+                                },
+                                "osVersion": {
+                                    "description": "Deployment operation parameters.",
+                                    "properties": {
+                                        "value": {
+                                            "default": "14.04.2-LTS",
+                                            "description": "The OS version for the VM. This will pick a fully patched image of this given OS version.",
+                                            "enum": [
+                                                "12.04.5-LTS",
+                                                "14.04.2-LTS",
+                                                "15.10"
+                                            ],
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "value"
+                                    ],
+                                    "type": "object",
+                                    "x-ms-client-flatten": true
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "templateLink": {
+                            "description": "Gets or sets the URI referencing the template. Use only one of Template or TemplateLink.",
+                            "properties": {
+                                "uri": {
+                                    "description": "URI referencing the template.",
+                                    "enum": [
+                                        "https://raw.githubusercontent.com/stankovski/azure-rest-api-specs/master/arm-compute/quickstart-templates/vm-simple-linux.json"
+                                    ],
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "uri"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "templateLink",
+                        "mode"
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
